@@ -3,12 +3,12 @@ using Ink.UnityIntegration;
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(BasicInkExample))]
+[CustomEditor(typeof(PhoneTextAdventure))]
 [InitializeOnLoad]
 public class BasicInkExampleEditor : Editor {
     static bool storyExpanded;
     static BasicInkExampleEditor () {
-        BasicInkExample.OnCreateStory += OnCreateStory;
+        PhoneTextAdventure.OnCreateStory += OnCreateStory;
     }
 
     static void OnCreateStory (Story story) {
@@ -19,7 +19,7 @@ public class BasicInkExampleEditor : Editor {
 	public override void OnInspectorGUI () {
 		Repaint();
 		base.OnInspectorGUI ();
-		var realTarget = target as BasicInkExample;
+		var realTarget = target as PhoneTextAdventure;
 		var story = realTarget.story;
 		InkPlayerWindow.DrawStoryPropertyField(story, ref storyExpanded, new GUIContent("Story"));
 	}

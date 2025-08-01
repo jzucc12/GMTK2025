@@ -1,11 +1,13 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CharacterButton : MonoBehaviour
 {
-    [SerializeField] private string myChar;
+    [field: SerializeField] public string myChar { get; private set; }
     [SerializeField] private TextMeshProUGUI display;
+    public Button myButton { get; private set; }
     public event Action<string> Pressed;
 
 
@@ -15,6 +17,11 @@ public class CharacterButton : MonoBehaviour
         {
             display.text = myChar;
         }
+    }
+
+    private void Awake()
+    {
+        myButton = GetComponent<Button>();
     }
 
     public void OnPress()
