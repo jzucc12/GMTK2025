@@ -2,21 +2,30 @@
 using Ink.Runtime;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
-// This is a super bare bones example of how to play and display a ink story in Unity.
 public class PhoneTextAdventure : MonoBehaviour 
 {
-
+	[Header("Ink stuff")]
     [SerializeField] private TextAsset inkJSONAsset = null;
-    [SerializeField] private Transform textContainer = null;
+
+	[Header("Prefabs")]
+	[SerializeField] private Transform textContainer = null;
     [SerializeField] private GameObject AITextPrefab = null;
     [SerializeField] private GameObject playerTextPrefab = null;
+	
+	[Header("Number Input")]
+	[SerializeField] private GameObject numberInputContainer;
     [SerializeField] private CharacterButton[] phoneButtons = null;
-    [HideInInspector] public Story story;
+
+	[Header("Text Input")]
+	[SerializeField] private GameObject textInputContainer;
+    [SerializeField] private TMP_InputField textInputField;
+
     public static event Action<Story> OnCreateStory;
+    public Story story;
 
 
+    #region Set Up
     private void Awake() 
 	{
 		StartStory(inkJSONAsset);
@@ -34,31 +43,37 @@ public class PhoneTextAdventure : MonoBehaviour
     private void StartStory(TextAsset newStory) 
 	{
 		story = new Story (newStory.text);
-        if(OnCreateStory != null) OnCreateStory(story);
+        story.BindExternalFunction("first_name", GetTextInput);
+        story.BindExternalFunction("last_name", GetTextInput);
+        if (OnCreateStory != null) OnCreateStory(story);
 		RefreshView();
 	}
 
     private void RefreshView() 
 	{
-		while (story.canContinue)
+        while (story.canContinue)
 		{
 			CreateContentView(story.Continue().Trim(), AITextPrefab);
 		}
 
-		if(story.currentChoices.Count > 0) 
+		var textInput = story.variablesState.GetVariableWithName("useText").ToString() == "true";
+        numberInputContainer.SetActive(!textInput);
+        textInputContainer.SetActive(textInput);
+        textInputField.text = "";
+        if (story.currentChoices.Count == 0) 
 		{
-			for (int i = 0; i < story.currentChoices.Count; i++) 
-			{
-				Choice choice = story.currentChoices[i];
-			}
+			StartStory(inkJSONAsset);
 		}
-		else 
-		{
-			Debug.LogError("End of story");
-		}
-	}
+    }
 
-    // When we click the choice button, tell the story to choose that choice!
+    private void CreateContentView(string text, GameObject textPrefab)
+    {
+        GameObject storyText = Instantiate(textPrefab, textContainer);
+        storyText.GetComponentInChildren<TextMeshProUGUI>().text = text;
+    }
+    #endregion
+
+    #region Choice selection
     private void OnClickChoiceButton(int index)
 	{
 		CreateContentView(phoneButtons[index].myChar, playerTextPrefab);
@@ -66,28 +81,48 @@ public class PhoneTextAdventure : MonoBehaviour
         RefreshView();
 	}
 
+    private string GetTextInput()
+    {
+        return textInputField.text;
+    }
+
+    public void SubmitText()
+    {
+        string submitted = textInputField.text.ToLower();
+        string answer = story.variablesState.GetVariableWithName("answer").ToString().ToLower();
+        bool pass = answer == "any" || submitted == answer;
+
+        CreateContentView(textInputField.text, playerTextPrefab);
+        if (pass)
+        {
+            story.ChooseChoiceIndex(0);
+        }
+        else
+        {
+            story.ChooseChoiceIndex(1);
+        }
+        RefreshView();
+    }
+    #endregion
+
     // Creates a textbox showing the the line of text
-    private void CreateContentView(string text, GameObject textPrefab) 
-	{
-        GameObject storyText = Instantiate (textPrefab, textContainer);
-		storyText.GetComponentInChildren<TextMeshProUGUI>().text = text;
-	}
 
-	// Creates a button showing the choice text
-	//Button CreateChoiceView(string text) 
-	//{
-	//	// Creates the button from a prefab
-	//	Button choice = Instantiate (buttonPrefab) as Button;
-	//	choice.transform.SetParent (textContainer, false);
-		
-	//	// Gets the text from the button prefab
-	//	Text choiceText = choice.GetComponentInChildren<Text> ();
-	//	choiceText.text = text;
 
-	//	// Make the button expand to fit the text
-	//	HorizontalLayoutGroup layoutGroup = choice.GetComponent <HorizontalLayoutGroup> ();
-	//	layoutGroup.childForceExpandHeight = false;
+    // Creates a button showing the choice text
+    //Button CreateChoiceView(string text) 
+    //{
+    //	// Creates the button from a prefab
+    //	Button choice = Instantiate (buttonPrefab) as Button;
+    //	choice.transform.SetParent (textContainer, false);
 
-	//	return choice;
-	//}
+    //	// Gets the text from the button prefab
+    //	Text choiceText = choice.GetComponentInChildren<Text> ();
+    //	choiceText.text = text;
+
+    //	// Make the button expand to fit the text
+    //	HorizontalLayoutGroup layoutGroup = choice.GetComponent <HorizontalLayoutGroup> ();
+    //	layoutGroup.childForceExpandHeight = false;
+
+    //	return choice;
+    //}
 }
