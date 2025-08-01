@@ -2,6 +2,7 @@
 using Ink.Runtime;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PhoneTextAdventure : MonoBehaviour 
 {
@@ -43,8 +44,7 @@ public class PhoneTextAdventure : MonoBehaviour
     private void StartStory(TextAsset newStory) 
 	{
 		story = new Story (newStory.text);
-        story.BindExternalFunction("first_name", GetTextInput);
-        story.BindExternalFunction("last_name", GetTextInput);
+        story.BindExternalFunction("get_Text", GetTextInput);
         if (OnCreateStory != null) OnCreateStory(story);
 		RefreshView();
 	}
@@ -59,7 +59,11 @@ public class PhoneTextAdventure : MonoBehaviour
 		var textInput = story.variablesState.GetVariableWithName("useText").ToString() == "true";
         numberInputContainer.SetActive(!textInput);
         textInputContainer.SetActive(textInput);
-        textInputField.text = "";
+        if(textInput)
+        {
+            textInputField.text = "";
+            EventSystem.current.SetSelectedGameObject(textInputField.gameObject);
+        }
         if (story.currentChoices.Count == 0) 
 		{
 			StartStory(inkJSONAsset);
@@ -76,6 +80,10 @@ public class PhoneTextAdventure : MonoBehaviour
     #region Choice selection
     private void OnClickChoiceButton(int index)
 	{
+        if(index >= story.currentChoices.Count)
+        {
+            index = story.currentChoices.Count - 1;
+        }
 		CreateContentView(phoneButtons[index].myChar, playerTextPrefab);
         story.ChooseChoiceIndex(index);
         RefreshView();
