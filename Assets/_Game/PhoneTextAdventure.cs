@@ -3,6 +3,7 @@ using Ink.Runtime;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class PhoneTextAdventure : MonoBehaviour 
 {
@@ -21,10 +22,19 @@ public class PhoneTextAdventure : MonoBehaviour
 	[Header("Text Input")]
 	[SerializeField] private GameObject textInputContainer;
     [SerializeField] private TMP_InputField textInputField;
+    private bool inTextInput;
 
     public static event Action<Story> OnCreateStory;
     public Story story;
 
+
+    private void Update()
+    {
+        if(inTextInput && (Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Return)))
+        {
+            SubmitText();
+        }
+    }
 
     #region Set Up
     private void Awake() 
@@ -38,6 +48,14 @@ public class PhoneTextAdventure : MonoBehaviour
         {
 			int value = ii;
 			phoneButtons[ii].myButton.onClick.AddListener(() => OnClickChoiceButton(value));
+        }
+    }
+
+    private void OnEnable()
+    {
+        if(inTextInput)
+        {
+            FocusInputField();
         }
     }
 
@@ -56,14 +74,9 @@ public class PhoneTextAdventure : MonoBehaviour
 			CreateContentView(story.Continue().Trim(), AITextPrefab);
 		}
 
-		var textInput = story.variablesState.GetVariableWithName("useText").ToString() == "true";
-        numberInputContainer.SetActive(!textInput);
-        textInputContainer.SetActive(textInput);
-        if(textInput)
-        {
-            textInputField.text = "";
-            EventSystem.current.SetSelectedGameObject(textInputField.gameObject);
-        }
+        SetUpTextInputScreen(story.variablesState.GetVariableWithName("useText").ToString() == "true");
+
+        //Reset once at end
         if (story.currentChoices.Count == 0) 
 		{
 			StartStory(inkJSONAsset);
@@ -74,6 +87,18 @@ public class PhoneTextAdventure : MonoBehaviour
     {
         GameObject storyText = Instantiate(textPrefab, textContainer);
         storyText.GetComponentInChildren<TextMeshProUGUI>().text = text;
+    }
+
+    private void SetUpTextInputScreen(bool setup)
+    {
+        numberInputContainer.SetActive(!setup);
+        textInputContainer.SetActive(setup);
+        inTextInput = setup;
+        if (setup)
+        {
+            textInputField.text = "";
+            FocusInputField();
+        }
     }
     #endregion
 
@@ -110,6 +135,12 @@ public class PhoneTextAdventure : MonoBehaviour
             story.ChooseChoiceIndex(1);
         }
         RefreshView();
+    }
+
+    private void FocusInputField()
+    {
+        EventSystem.current.SetSelectedGameObject(textInputField.gameObject);
+        textInputField?.OnPointerClick(new PointerEventData(EventSystem.current));
     }
     #endregion
 
