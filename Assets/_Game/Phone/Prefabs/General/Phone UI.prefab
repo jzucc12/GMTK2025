@@ -104,6 +104,10 @@ MonoBehaviour:
   playerTextPrefab: {fileID: 5878445719189675956, guid: ab6b9dbab292a1d43a5295bd406faf48, type: 3}
   callContainer: {fileID: 3099900965450633584}
   textPopDelay: 1.2
+  bubbleColors:
+  - {r: 0.3150943, g: 1, b: 0.3616686, a: 1}
+  - {r: 0.8922764, g: 0.41037738, b: 1, a: 1}
+  - {r: 0.98633534, g: 1, b: 0.2471698, a: 1}
   numberInputContainer: {fileID: 1737438500678550907}
   phoneButtons:
   - {fileID: 8128576579339344934}
