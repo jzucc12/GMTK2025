@@ -118,14 +118,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Phone UI
       objectReference: {fileID: 0}
-    - target: {fileID: 651146513726299376, guid: 672335a4608c5044b955c4e1d18744af, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 651146513726299376, guid: 672335a4608c5044b955c4e1d18744af, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 976671331881600188, guid: 672335a4608c5044b955c4e1d18744af, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -224,30 +216,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7868116315351918691, guid: 672335a4608c5044b955c4e1d18744af, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8414751866397111639, guid: 672335a4608c5044b955c4e1d18744af, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8414751866397111639, guid: 672335a4608c5044b955c4e1d18744af, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8446347079195600704, guid: 672335a4608c5044b955c4e1d18744af, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8446347079195600704, guid: 672335a4608c5044b955c4e1d18744af, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8446347079195600704, guid: 672335a4608c5044b955c4e1d18744af, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8446347079195600704, guid: 672335a4608c5044b955c4e1d18744af, type: 3}
-      propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

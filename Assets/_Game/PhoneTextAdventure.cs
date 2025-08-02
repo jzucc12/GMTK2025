@@ -20,6 +20,8 @@ public class PhoneTextAdventure : MonoBehaviour
     [SerializeField] private GameObject callContainer;
     [SerializeField] private float textPopDelay;
     [SerializeField] private Color[] bubbleColors;
+    [SerializeField] private PlaySound sentSound;
+    [SerializeField] private PlaySound receivedSound;
     private Queue<TextData> texts = new();
     
 	[Header("Number Input")]
@@ -121,6 +123,11 @@ public class PhoneTextAdventure : MonoBehaviour
             if (data.delay)
             {
                 await Awaitable.WaitForSecondsAsync(textPopDelay);
+                receivedSound.Play();
+            }
+            else
+            {
+                sentSound.Play();
             }
             GameObject storyText = Instantiate(data.textPrefab, textContainer);
             storyText.GetComponentInChildren<TextMeshProUGUI>().text = data.text;
@@ -128,6 +135,7 @@ public class PhoneTextAdventure : MonoBehaviour
             {
                 storyText.GetComponentInChildren<Image>().color = bubbleColors[data.speakerNo];
             }
+
             await Awaitable.NextFrameAsync();
             LayoutRebuilder.ForceRebuildLayoutImmediate(textContainer.GetComponent<RectTransform>());
             await Awaitable.NextFrameAsync();
