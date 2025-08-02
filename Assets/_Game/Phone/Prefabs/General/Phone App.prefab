@@ -383,6 +383,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2811796319373326965, guid: 5592317d35449684aad015909ab3b25c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3413302076087338348, guid: 5592317d35449684aad015909ab3b25c, type: 3}
       propertyPath: m_Name
       value: Phone Button Interface
@@ -909,11 +913,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5907474829404010278, guid: ddfd63f0c59f6af4aaf23988df5eb128, type: 3}
       propertyPath: m_SizeDelta.x
-      value: -20
+      value: 56.0967
       objectReference: {fileID: 0}
     - target: {fileID: 5907474829404010278, guid: ddfd63f0c59f6af4aaf23988df5eb128, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 440
+      value: 389.269
       objectReference: {fileID: 0}
     - target: {fileID: 5907474829404010278, guid: ddfd63f0c59f6af4aaf23988df5eb128, type: 3}
       propertyPath: m_LocalPosition.x
@@ -945,11 +949,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5907474829404010278, guid: ddfd63f0c59f6af4aaf23988df5eb128, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -1.5852966
       objectReference: {fileID: 0}
     - target: {fileID: 5907474829404010278, guid: ddfd63f0c59f6af4aaf23988df5eb128, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -10
+      value: -48.04828
       objectReference: {fileID: 0}
     - target: {fileID: 5907474829404010278, guid: ddfd63f0c59f6af4aaf23988df5eb128, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -963,9 +967,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6148039694374953085, guid: ddfd63f0c59f6af4aaf23988df5eb128, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6723981675632593539, guid: ddfd63f0c59f6af4aaf23988df5eb128, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7282655380831846165, guid: ddfd63f0c59f6af4aaf23988df5eb128, type: 3}
       propertyPath: m_Name
       value: Text Log
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662724743955528841, guid: ddfd63f0c59f6af4aaf23988df5eb128, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
