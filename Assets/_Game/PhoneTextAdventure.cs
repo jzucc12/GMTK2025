@@ -31,6 +31,9 @@ public class PhoneTextAdventure : MonoBehaviour
     [SerializeField] private TMP_InputField textInputField;
     private bool inTextInput;
 
+    [Header("End Game")]
+    [SerializeField] private GameObject endGameContainer;
+
     public static event Action<Story> OnCreateStory;
     public Story story;
     private bool queueRunning => running != null && !running.IsCompleted;
@@ -89,7 +92,10 @@ public class PhoneTextAdventure : MonoBehaviour
 
         if (story.currentChoices.Count == 0) 
 		{
-			StartStory(inkJSONAsset);
+            callContainer.SetActive(false);
+            textInputContainer.SetActive(false);
+            numberInputContainer.SetActive(false);
+            endGameContainer.SetActive(true);
 		}
     }
 
