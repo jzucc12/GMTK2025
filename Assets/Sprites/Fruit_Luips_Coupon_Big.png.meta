@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: d6f6ed0401078c046a16325892f92df7
+guid: 9f5b8912dfeaa134e912e391d4dd972d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -988581726885034934
-    second: Dream_Journal_0
+      213: 6742187778788297669
+    second: Fruit_Luips_Coupon_Big_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Dream_Journal_0
+      name: Fruit_Luips_Coupon_Big_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 10
-        width: 15
-        height: 118
+        y: 0
+        width: 192
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a444399382ad742f0800000000000000
-      internalID: -988581726885034934
+      spriteID: 5cb08ab2010119d50800000000000000
+      internalID: 6742187778788297669
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Dream_Journal_0: -988581726885034934
+      Fruit_Luips_Coupon_Big_0: 6742187778788297669
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
