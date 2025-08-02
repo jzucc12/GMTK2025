@@ -174,8 +174,8 @@ public class PhoneTextAdventure : MonoBehaviour
 
     public void SubmitText()
     {
-        string submitted = textInputField.text.ToLower();
-        string answer = story.variablesState.GetVariableWithName("answer").ToString().ToLower();
+        string submitted = textInputField.text.ToLower().Replace(" ", "");
+        string answer = story.variablesState.GetVariableWithName("answer").ToString().ToLower().Replace(" ","");
         bool pass = answer == "any" || submitted == answer;
 
         AddTextToStack(textInputField.text, playerTextPrefab, false, -1);
