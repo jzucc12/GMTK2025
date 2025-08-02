@@ -4,6 +4,7 @@ using Ink.Runtime;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class PhoneTextAdventure : MonoBehaviour 
 {
@@ -18,7 +19,8 @@ public class PhoneTextAdventure : MonoBehaviour
     [Header("Other Stuff")]
     [SerializeField] private GameObject callContainer;
     [SerializeField] private float textPopDelay;
-    private readonly Queue<TextData> texts = new();
+    [SerializeField] private Color[] bubbleColors;
+    private Queue<TextData> texts = new();
     
 	[Header("Number Input")]
 	[SerializeField] private GameObject numberInputContainer;
@@ -31,7 +33,8 @@ public class PhoneTextAdventure : MonoBehaviour
 
     public static event Action<Story> OnCreateStory;
     public Story story;
-    private bool queueRunning;
+    private bool queueRunning => running != null && !running.IsCompleted;
+    Awaitable running;
 
 
     private void Update()
@@ -79,44 +82,50 @@ public class PhoneTextAdventure : MonoBehaviour
         while (story.canContinue)
         {
             string text = story.Continue().Trim();
-			AddTextToStack(text, AITextPrefab, true);
+			AddTextToStack(text, AITextPrefab, true, int.Parse(story.variablesState.GetVariableWithName("speaker_Number").ToString()));
 		}
 
         SetUpTextInputScreen(story.variablesState.GetVariableWithName("useText").ToString() == "true");
 
-        //Reset once at end
         if (story.currentChoices.Count == 0) 
 		{
 			StartStory(inkJSONAsset);
 		}
     }
 
-    private void AddTextToStack(string text, GameObject textPrefab, bool delay)
+    private void AddTextToStack(string text, GameObject textPrefab, bool delay, int speakerNo)
     {
-        texts.Enqueue(new TextData(text, textPrefab, delay));
+        if(!delay)
+        {
+            texts.Clear();
+            running.Cancel();
+            running = null;
+        }
+        texts.Enqueue(new TextData(text, textPrefab, delay, speakerNo));
         if (!queueRunning)
         {
-            DisplayAllTexts();
+            running = DisplayAllTexts();
         }
     }
 
-    private async void DisplayAllTexts()
+    private async Awaitable DisplayAllTexts()
     {
-        queueRunning = true;
         while (texts.TryDequeue(out TextData data))
         {
             if (data.delay)
             {
                 await Awaitable.WaitForSecondsAsync(textPopDelay);
             }
-            else
-            {
-                texts.Clear();
-            }
             GameObject storyText = Instantiate(data.textPrefab, textContainer);
             storyText.GetComponentInChildren<TextMeshProUGUI>().text = data.text;
+            if(data.speakerNo >= 0)
+            {
+                storyText.GetComponentInChildren<Image>().color = bubbleColors[data.speakerNo];
+            }
+            await Awaitable.NextFrameAsync();
+            LayoutRebuilder.ForceRebuildLayoutImmediate(textContainer.GetComponent<RectTransform>());
+            await Awaitable.NextFrameAsync();
         }
-        queueRunning = false;
     }
 
     private void SetUpTextInputScreen(bool setup)
@@ -139,7 +148,7 @@ public class PhoneTextAdventure : MonoBehaviour
         {
             index = story.currentChoices.Count - 1;
         }
-		AddTextToStack(phoneButtons[index].myChar, playerTextPrefab, false);
+		AddTextToStack(phoneButtons[index].myChar, playerTextPrefab, false, -1);
         story.ChooseChoiceIndex(index);
         RefreshView();
 	}
@@ -155,7 +164,7 @@ public class PhoneTextAdventure : MonoBehaviour
         string answer = story.variablesState.GetVariableWithName("answer").ToString().ToLower();
         bool pass = answer == "any" || submitted == answer;
 
-        AddTextToStack(textInputField.text, playerTextPrefab, false);
+        AddTextToStack(textInputField.text, playerTextPrefab, false, -1);
         if (pass)
         {
             story.ChooseChoiceIndex(0);
@@ -170,7 +179,9 @@ public class PhoneTextAdventure : MonoBehaviour
     private void FocusInputField()
     {
         EventSystem.current.SetSelectedGameObject(textInputField.gameObject);
+        textInputField.ActivateInputField();
         textInputField.OnPointerClick(new PointerEventData(EventSystem.current));
+        textInputField.Select();
     }
     #endregion
 
@@ -179,33 +190,14 @@ public class PhoneTextAdventure : MonoBehaviour
         public string text;
         public GameObject textPrefab;
         public bool delay;
+        public int speakerNo;
 
-        public TextData(string text, GameObject prefab, bool delay)
+        public TextData(string text, GameObject prefab, bool delay, int speakerNo)
         {
             this.text = text;
             textPrefab = prefab;
             this.delay = delay;
+            this.speakerNo = speakerNo;
         }
     }
-
-    // Creates a textbox showing the the line of text
-
-
-    // Creates a button showing the choice text
-    //Button CreateChoiceView(string text) 
-    //{
-    //	// Creates the button from a prefab
-    //	Button choice = Instantiate (buttonPrefab) as Button;
-    //	choice.transform.SetParent (textContainer, false);
-
-    //	// Gets the text from the button prefab
-    //	Text choiceText = choice.GetComponentInChildren<Text> ();
-    //	choiceText.text = text;
-
-    //	// Make the button expand to fit the text
-    //	HorizontalLayoutGroup layoutGroup = choice.GetComponent <HorizontalLayoutGroup> ();
-    //	layoutGroup.childForceExpandHeight = false;
-
-    //	return choice;
-    //}
 }
