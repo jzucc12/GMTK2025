@@ -25,12 +25,6 @@ public class FinalBoss : MonoBehaviour
     {
         SetLives(startLives);
         button.SetBounds(minBounds, maxBounds);
-        for (int ii = 0; ii < startEnemies; ii++)
-        {
-            FinalBossBounds enemy = Instantiate(enemyPrefab, container);
-            enemy.transform.localPosition = new Vector2(UnityEngine.Random.Range(minBounds.x, maxBounds.x), UnityEngine.Random.Range(minBounds.y, maxBounds.y));
-            enemy.SetBounds(minBounds, maxBounds);
-        }
     }
 
     private void OnEnable()
