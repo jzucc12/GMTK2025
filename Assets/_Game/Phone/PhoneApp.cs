@@ -25,26 +25,26 @@ public class PhoneApp : MonoBehaviour
     private void UpdateOutput(string number)
     {
         string output = "";
-        if (number.Length > 0)
-        {
-            output = "1(";
-        }
-
-        if (number.Length >= 3)
-        {
-            output += number.Substring(0, 3);
-            output += ")";
-            number = number.Remove(0, 3);
-        }
-
-        if (number.Length >= 4)
-        {
-            output += number.Substring(0, 3);
-            output += "-";
-            number = number.Remove(0, 3);
-            output += number.Substring(0, 1);
-            number = number.Remove(0, 1);
-        }
+        // if (number.Length > 0)
+        // {
+        //     output = "1(";
+        // }
+        //
+        // if (number.Length >= 3)
+        // {
+        //     output += number.Substring(0, 3);
+        //     output += ")";
+        //     number = number.Remove(0, 3);
+        // }
+        //
+        // if (number.Length >= 4)
+        // {
+        //     output += number.Substring(0, 3);
+        //     output += "-";
+        //     number = number.Remove(0, 3);
+        //     output += number.Substring(0, 1);
+        //     number = number.Remove(0, 1);
+        // }
 
         output += number;
 
