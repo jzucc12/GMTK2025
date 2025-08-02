@@ -7,7 +7,7 @@ public class CharacterButton : MonoBehaviour
 {
     [field: SerializeField] public string myChar { get; private set; }
     [SerializeField] private TextMeshProUGUI display;
-    public Button myButton { get; private set; }
+    [field: SerializeField] public Button MyButton { get; private set; }
     public event Action<string> Pressed;
 
 
@@ -17,11 +17,6 @@ public class CharacterButton : MonoBehaviour
         {
             display.text = myChar;
         }
-    }
-
-    private void Awake()
-    {
-        myButton = GetComponent<Button>();
     }
 
     public void OnPress()
