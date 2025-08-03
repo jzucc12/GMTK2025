@@ -163,6 +163,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6928731624262645601, guid: e43471af00f4b844eb90f55e8ca80c1a, type: 3}
+      propertyPath: m_Resource
+      value: 
+      objectReference: {fileID: 8300000, guid: b0534f9931033e844ae88eae6f49cc81, type: 3}
     - target: {fileID: 7542536327485242143, guid: e43471af00f4b844eb90f55e8ca80c1a, type: 3}
       propertyPath: m_Name
       value: Interactable Cereal
