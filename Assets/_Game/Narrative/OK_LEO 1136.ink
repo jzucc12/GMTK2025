@@ -194,8 +194,8 @@ Welcome back! Obviously you want me now, right? :D
 -> Options_Puzzle
 
 ===BMI===
-~answer = "25"
-I need your BMI?! 
+~answer = "200"
+I need your height in cm?! 
 LEO's making you work for that refund! HAH!
 + [BMI] -> Uninstall
 + [wrong] Ol' {player_Name} would know that. 

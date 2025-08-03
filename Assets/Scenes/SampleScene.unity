@@ -587,6 +587,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Win Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 2250748433077972351, guid: 05f21b90179d6fc49a95e30ca8b3b63c, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2250748433077972351, guid: 05f21b90179d6fc49a95e30ca8b3b63c, type: 3}
+      propertyPath: m_Color.a
+      value: 0.7411765
+      objectReference: {fileID: 0}
+    - target: {fileID: 2250748433077972351, guid: 05f21b90179d6fc49a95e30ca8b3b63c, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2250748433077972351, guid: 05f21b90179d6fc49a95e30ca8b3b63c, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2250748433077972351, guid: 05f21b90179d6fc49a95e30ca8b3b63c, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2274443879311052678, guid: 05f21b90179d6fc49a95e30ca8b3b63c, type: 3}
       propertyPath: m_Camera
       value: 
@@ -688,7 +708,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8677766614377760077, guid: 05f21b90179d6fc49a95e30ca8b3b63c, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 05f21b90179d6fc49a95e30ca8b3b63c, type: 3}
