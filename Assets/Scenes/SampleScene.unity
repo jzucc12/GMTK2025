@@ -360,10 +360,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 182711185458383320, guid: 3e5a9ba48b8c0c942ae98e6a4807568c, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 75.899994
-      objectReference: {fileID: 0}
+    - target: {fileID: 2064872243751161368, guid: 3e5a9ba48b8c0c942ae98e6a4807568c, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 4015520331381685068, guid: b396e27930d271c48ab2781e833ad059, type: 3}
     - target: {fileID: 4326202489459858556, guid: 3e5a9ba48b8c0c942ae98e6a4807568c, type: 3}
       propertyPath: m_Name
       value: Game Canvas
@@ -452,10 +452,6 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 519420031}
-    - target: {fileID: 8280782564363256970, guid: 3e5a9ba48b8c0c942ae98e6a4807568c, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 351247718624710110, guid: 3cb85ae0084a350428341258e2728691, type: 3}
     - target: {fileID: 8819759689854384506, guid: 3e5a9ba48b8c0c942ae98e6a4807568c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 

@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e241c9d0203d7da4391ae29fabb53f89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inkJSONAsset: {fileID: 4900000, guid: f0b01b6a5316a3c4697560bbdca1d665, type: 3}
+  inkJSONAsset: {fileID: 4900000, guid: ae86bd51cfc2285428bb83dbac90bc38, type: 3}
   textContainer: {fileID: 4911012837370131941}
   AITextPrefab: {fileID: 5095556265874214985, guid: d9c017e44e7683e479c58ecb6b50c409, type: 3}
   playerTextPrefab: {fileID: 5878445719189675956, guid: ab6b9dbab292a1d43a5295bd406faf48, type: 3}

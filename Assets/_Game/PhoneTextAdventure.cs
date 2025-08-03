@@ -130,6 +130,7 @@ public class PhoneTextAdventure : MonoBehaviour
         OnFinish?.Invoke();
     }
 
+    private static int inst;
     private void AddTextToStack(string text, GameObject textPrefab, bool delay, int speakerNo)
     {
         if(!delay)
@@ -146,8 +147,11 @@ public class PhoneTextAdventure : MonoBehaviour
 
     private async Awaitable DisplayAllTexts()
     {
+        int myinst = ++inst;
         while (texts.TryDequeue(out TextData data))
         {
+            if (myinst != inst) return;
+            if (data.delay && string.IsNullOrEmpty(data.text)) continue;
             if (data.delay)
             {
                 bool held = false;
@@ -167,6 +171,7 @@ public class PhoneTextAdventure : MonoBehaviour
                 float delayTime = textPopDelay;
                 delayTime *= held ? 0.5f : 1;
                 await Awaitable.WaitForSecondsAsync(delayTime);
+                if (myinst != inst) return;
                 receivedSound.Play();
             }
             else
