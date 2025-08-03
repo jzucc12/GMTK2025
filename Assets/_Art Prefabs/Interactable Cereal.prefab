@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c30ad892c086d8d47ac0b9cbc280707f, type: 3}
+  m_Sprite: {fileID: 3974738185739774608, guid: c30ad892c086d8d47ac0b9cbc280707f, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -165,7 +165,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7542536327485242143, guid: e43471af00f4b844eb90f55e8ca80c1a, type: 3}
       propertyPath: m_Name
-      value: Interactable Object Variant
+      value: Interactable Cereal
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

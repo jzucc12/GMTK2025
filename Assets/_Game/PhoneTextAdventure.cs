@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using Ink.Runtime;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class PhoneTextAdventure : MonoBehaviour 
 {
@@ -33,13 +35,20 @@ public class PhoneTextAdventure : MonoBehaviour
     [SerializeField] private TMP_InputField textInputField;
     private bool inTextInput;
 
+    [Header("Hold")]
+    [SerializeField] private PlaySound holdMusic;
+    [SerializeField] private Vector2 holdTimes;
+    private bool isHolding;
+    
     [Header("End Game")]
     [SerializeField] private GameObject endGameContainer;
+    [SerializeField] private UnityEvent OnFinish;
 
     public static event Action<Story> OnCreateStory;
     public Story story;
     private bool queueRunning => running != null && !running.IsCompleted;
     Awaitable running;
+    private int lastSpeaker = 0;
 
 
     private void Update()
@@ -66,6 +75,11 @@ public class PhoneTextAdventure : MonoBehaviour
         {
             FocusInputField();
         }
+
+        if (isHolding)
+        {
+            holdMusic.PlayFromMiddle();
+        }
     }
     
     public void PlaceCall() 
@@ -82,23 +96,33 @@ public class PhoneTextAdventure : MonoBehaviour
 		RefreshView();
 	}
 
-    private void RefreshView() 
-	{
+    private void RefreshView()
+    {
         while (story.canContinue)
         {
             string text = story.Continue().Trim();
 			AddTextToStack(text, AITextPrefab, true, int.Parse(story.variablesState.GetVariableWithName("speaker_Number").ToString()));
 		}
 
+
         SetUpTextInputScreen(story.variablesState.GetVariableWithName("useText").ToString() == "true");
 
         if (story.currentChoices.Count == 0) 
 		{
-            callContainer.SetActive(false);
-            textInputContainer.SetActive(false);
-            numberInputContainer.SetActive(false);
-            endGameContainer.SetActive(true);
+            ToEndGame();
 		}
+    }
+
+    [ContextMenu("End")]
+    public void ToEndGame()
+    {
+        sentSound.gameObject.SetActive(false);
+        receivedSound.gameObject.SetActive(false);
+        callContainer.SetActive(false);
+        textInputContainer.SetActive(false);
+        numberInputContainer.SetActive(false);
+        endGameContainer.SetActive(true);
+        OnFinish?.Invoke();
     }
 
     private void AddTextToStack(string text, GameObject textPrefab, bool delay, int speakerNo)
@@ -122,7 +146,23 @@ public class PhoneTextAdventure : MonoBehaviour
         {
             if (data.delay)
             {
-                await Awaitable.WaitForSecondsAsync(textPopDelay);
+                bool held = false;
+                if (data.speakerNo != lastSpeaker && data.speakerNo > 0)
+                {
+                    held = true;
+                    float time = Random.Range(holdTimes.x, holdTimes.y);
+                    await Awaitable.WaitForSecondsAsync(0.5f);
+                    PlayHoldMusic(time);
+                    await Awaitable.WaitForSecondsAsync(time);
+                }
+                if (data.speakerNo >= 0)
+                {
+                    lastSpeaker = data.speakerNo;
+                }
+
+                float delayTime = textPopDelay;
+                delayTime *= held ? 0.5f : 1;
+                await Awaitable.WaitForSecondsAsync(delayTime);
                 receivedSound.Play();
             }
             else
@@ -153,11 +193,21 @@ public class PhoneTextAdventure : MonoBehaviour
             FocusInputField();
         }
     }
+
+    private async void PlayHoldMusic(float time)
+    {
+        holdMusic.PlayFromMiddle();
+        isHolding = true;
+        await Awaitable.WaitForSecondsAsync(time);
+        holdMusic.Stop();
+        isHolding = false;
+    }
     #endregion
 
     #region Choice selection
     private void OnClickChoiceButton(int index)
 	{
+        if (isHolding) return;
         if(index >= story.currentChoices.Count)
         {
             index = story.currentChoices.Count - 1;
@@ -174,6 +224,7 @@ public class PhoneTextAdventure : MonoBehaviour
 
     public void SubmitText()
     {
+        if (isHolding) return;
         string submitted = textInputField.text.ToLower().Replace(" ", "");
         string answer = story.variablesState.GetVariableWithName("answer").ToString().ToLower().Replace(" ","");
         bool pass = answer == "any" || submitted == answer;

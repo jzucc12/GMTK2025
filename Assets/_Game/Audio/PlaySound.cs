@@ -16,4 +16,21 @@ public class PlaySound : MonoBehaviour
     {
         audioSource.Play();
     }
+
+    public void PlayAtPitch(float pitch)
+    {
+        audioSource.pitch = pitch;
+        Play();
+    }
+
+    public void PlayFromMiddle()
+    {
+        audioSource.time = Random.Range(0, audioSource.clip.length);
+        Play();
+    }
+
+    public void Stop()
+    {
+        audioSource.Stop();
+    }
 }

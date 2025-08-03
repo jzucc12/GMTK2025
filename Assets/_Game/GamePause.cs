@@ -23,14 +23,14 @@ public class GamePause : MonoBehaviour
         }
     }
 
-    private void SetPause(bool pause)
+    public void SetPause(bool pause)
     {
         isPaused = pause;
         canvas.enabled = pause;
         Time.timeScale = pause ? 0 : 1;
     }
 
-    private void RestartGame()
+    public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }

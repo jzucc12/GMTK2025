@@ -1,5 +1,6 @@
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
 public class InteractableObject : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
@@ -7,6 +8,7 @@ public class InteractableObject : MonoBehaviour, IPointerEnterHandler, IPointerE
     [SerializeField] private GameObject activateWindow;
     [SerializeField] private float angle;
     [SerializeField] private float time;
+    [SerializeField] private UnityEvent OnInteract;
     private Sequence seq;
     
     public void OnPointerEnter(PointerEventData eventData)
@@ -20,12 +22,13 @@ public class InteractableObject : MonoBehaviour, IPointerEnterHandler, IPointerE
     
     public void OnPointerExit(PointerEventData eventData)
     {
-        seq.Kill(false);
+        seq.Kill(true);
         transform.eulerAngles = Vector3.zero;
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
         activateWindow.SetActive(true);
+        OnInteract?.Invoke();
     }
 }

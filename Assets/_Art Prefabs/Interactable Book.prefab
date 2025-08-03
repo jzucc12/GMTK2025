@@ -149,7 +149,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5263954505484719625, guid: e43471af00f4b844eb90f55e8ca80c1a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 116
+      value: 112
       objectReference: {fileID: 0}
     - target: {fileID: 5263954505484719625, guid: e43471af00f4b844eb90f55e8ca80c1a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -163,9 +163,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6928731624262645601, guid: e43471af00f4b844eb90f55e8ca80c1a, type: 3}
+      propertyPath: m_Resource
+      value: 
+      objectReference: {fileID: 8300000, guid: dbb265d92e6001e4fa145d327d72777f, type: 3}
     - target: {fileID: 7542536327485242143, guid: e43471af00f4b844eb90f55e8ca80c1a, type: 3}
       propertyPath: m_Name
-      value: Interactable Book Variant
+      value: Interactable Book
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

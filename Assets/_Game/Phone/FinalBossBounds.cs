@@ -6,11 +6,15 @@ public class FinalBossBounds : MonoBehaviour, IPointerEnterHandler
 {
     [SerializeField] private float moveSpeed;
     [SerializeField] private RectTransform image;
+    [SerializeField] private bool setBoundsSelf;
+    [SerializeField] private Vector2 selfBoundsMin;
+    [SerializeField] private Vector2 selfBoundsMax;
     private Vector2 minBounds;
     private Vector2 maxBounds;
     private Vector2 currentMove;
     private Vector2 startPos;
     public event Action oof;
+    public bool move;
     public void OnPointerEnter(PointerEventData eventData)
     {
         oof?.Invoke();
@@ -18,8 +22,12 @@ public class FinalBossBounds : MonoBehaviour, IPointerEnterHandler
 
     private void Awake()
     {
-        startPos = transform.position;
+        startPos = image.anchoredPosition;
         Reset();
+        if (setBoundsSelf)
+        {
+            SetBounds(selfBoundsMin, selfBoundsMax);
+        }
     }
 
     public void SetBounds(Vector2 min, Vector2 max)
@@ -35,8 +43,12 @@ public class FinalBossBounds : MonoBehaviour, IPointerEnterHandler
 
     public void Reset()
     {
-        transform.position = startPos;
-        float vert = UnityEngine.Random.Range(.25f, .75f);
+        if (startPos == Vector2.zero)
+        {
+            startPos = image.anchoredPosition;
+        }
+        image.anchoredPosition = startPos;
+        float vert = UnityEngine.Random.Range(.4f, .6f);
         float flipX = Mathf.Sign(UnityEngine.Random.Range(-1, 2));
         float flipY = Mathf.Sign(UnityEngine.Random.Range(-1, 2));
         currentMove = new Vector2(moveSpeed * (1 - vert) * flipX, moveSpeed * vert * flipY);
@@ -44,7 +56,8 @@ public class FinalBossBounds : MonoBehaviour, IPointerEnterHandler
 
     private void FixedUpdate()
     {
-        Vector2 goal = (Vector2)transform.localPosition + currentMove;
+        if (!move) return;
+        Vector2 goal = (Vector2)image.anchoredPosition + currentMove;
         if(goal.x > maxBounds.x)
         {
             goal.x = maxBounds.x;
@@ -65,11 +78,6 @@ public class FinalBossBounds : MonoBehaviour, IPointerEnterHandler
             goal.y = minBounds.y;
             currentMove.y *= -1;
         }
-        transform.localPosition = goal;
-
-        //float vert = Random.Range(.25f, .75f);
-        //float flipX = Mathf.Sign(Random.Range(-1, 2));
-        //float flipY = Mathf.Sign(Random.Range(-1, 2));
-        //rb.linearVelocity = new Vector2(moveSpeed * (1 - vert), moveSpeed * vert);
+        image.anchoredPosition = goal;
     }
 }
