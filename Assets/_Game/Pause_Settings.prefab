@@ -730,6 +730,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Settings Slider
       objectReference: {fileID: 0}
+    - target: {fileID: 2805603496051020605, guid: fca34b29940e3a145a9290cf6f733b2d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 2021395859797635225, guid: ca7419a5abb79764ba6526f9d21ea70b, type: 3}
     - target: {fileID: 2842747967796272930, guid: fca34b29940e3a145a9290cf6f733b2d, type: 3}
       propertyPath: m_text
       value: Volume
@@ -849,6 +853,18 @@ PrefabInstance:
     - target: {fileID: 4299088628287102512, guid: fca34b29940e3a145a9290cf6f733b2d, type: 3}
       propertyPath: m_AnchorMin.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6208832601784775257, guid: fca34b29940e3a145a9290cf6f733b2d, type: 3}
+      propertyPath: m_Color.b
+      value: 0.16294838
+      objectReference: {fileID: 0}
+    - target: {fileID: 6208832601784775257, guid: fca34b29940e3a145a9290cf6f733b2d, type: 3}
+      propertyPath: m_Color.g
+      value: 0.23930885
+      objectReference: {fileID: 0}
+    - target: {fileID: 6208832601784775257, guid: fca34b29940e3a145a9290cf6f733b2d, type: 3}
+      propertyPath: m_Color.r
+      value: 0.67295593
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

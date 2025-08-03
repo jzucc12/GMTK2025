@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: b396e27930d271c48ab2781e833ad059
+guid: 0f135257ef91d384c95ed87f903c5231
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4015520331381685068
-    second: Book_Tempest_0
+      213: 2219926346140274492
+    second: Desk 1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Book_Tempest_0
+      name: Desk 1_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 32
-        height: 132
+        width: 640
+        height: 195
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c4b3d5c577ef9b730800000000000000
-      internalID: 4015520331381685068
+      spriteID: c3fc8390043cece10800000000000000
+      internalID: 2219926346140274492
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Book_Tempest_0: 4015520331381685068
+      Desk 1_0: 2219926346140274492
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
