@@ -17,7 +17,7 @@ public class GamePause : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if(Input.GetKeyDown(KeyCode.Tab))
         {
             SetPause(!isPaused);
         }

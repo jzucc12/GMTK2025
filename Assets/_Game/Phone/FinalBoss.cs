@@ -14,9 +14,7 @@ public class FinalBoss : MonoBehaviour
     [SerializeField] private Vector2 maxBounds;
 
     [Header("Enemy")]
-    [SerializeField] private int startEnemies;
-    [SerializeField] private int clicksPerEnemy;
-    [SerializeField] private FinalBossBounds enemyPrefab;
+    [SerializeField] private FinalBossBounds[] enemyPrefabs;
     private int currentLives;
     private int currentClicks;
 
@@ -25,30 +23,23 @@ public class FinalBoss : MonoBehaviour
     {
         SetLives(startLives);
         button.SetBounds(minBounds, maxBounds);
-    }
-
-    private void OnEnable()
-    {
-        FinalBossEnemy.oof += LoseLife;
-    }
-
-    private void OnDisable()
-    {
-        FinalBossEnemy.oof -= LoseLife;
+        foreach(FinalBossBounds enemy in enemyPrefabs)
+        {
+            enemy.SetBounds(minBounds, maxBounds);
+            enemy.oof += LoseLife;
+        }
     }
 
     public void StartGame()
     {
         SetLives(startLives);
         SetClicks(0);
-        currentLives = startLives;
-        for(int ii = 0; ii < startEnemies; ii++)
+        foreach (FinalBossBounds enemy in enemyPrefabs)
         {
-            FinalBossBounds enemy = Instantiate(enemyPrefab, container);
-            enemy.transform.localPosition = new Vector2(UnityEngine.Random.Range(minBounds.x, maxBounds.x), UnityEngine.Random.Range(minBounds.y, maxBounds.y));
-            enemy.SetBounds(minBounds, maxBounds);
+            enemy.gameObject.SetActive(true);
         }
     }
+
     public void LoseLife()
     {
         SetLives(currentLives - 1);
@@ -64,7 +55,7 @@ public class FinalBoss : MonoBehaviour
         currentClicks = Mathf.Clamp(clicks, 0, clicksNeeded);
         if(currentClicks == clicksNeeded)
         {
-            //You win
+            Defeat();
         }
     }
 
@@ -74,7 +65,25 @@ public class FinalBoss : MonoBehaviour
         livesText.text = $"Lives: {currentLives}";
         if(currentLives == 0)
         {
-            //Game Over
+            Defeat();
+        }
+    }
+
+    private void Victory()
+    {
+        EndGame();
+    }
+
+    private void Defeat()
+    {
+        EndGame();
+    }
+
+    private void EndGame()
+    {
+        foreach (FinalBossBounds enemy in enemyPrefabs)
+        {
+            enemy.gameObject.SetActive(false);
         }
     }
 }

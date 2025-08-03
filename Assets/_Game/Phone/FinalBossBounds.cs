@@ -1,20 +1,25 @@
+using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class FinalBossBounds : MonoBehaviour
+public class FinalBossBounds : MonoBehaviour, IPointerEnterHandler
 {
     [SerializeField] private float moveSpeed;
     [SerializeField] private RectTransform image;
     private Vector2 minBounds;
     private Vector2 maxBounds;
     private Vector2 currentMove;
-
+    private Vector2 startPos;
+    public event Action oof;
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        oof?.Invoke();
+    }
 
     private void Awake()
     {
-        float vert = Random.Range(.25f, .75f);
-        float flipX = Mathf.Sign(Random.Range(-1, 2));
-        float flipY = Mathf.Sign(Random.Range(-1, 2));
-        currentMove = new Vector2(moveSpeed * (1 - vert) * flipX, moveSpeed * vert * flipY);
+        startPos = transform.position;
+        Reset();
     }
 
     public void SetBounds(Vector2 min, Vector2 max)
@@ -26,6 +31,15 @@ public class FinalBossBounds : MonoBehaviour
         maxBounds.x -= image.sizeDelta.x / 2;
         maxBounds.y -= image.sizeDelta.y / 2;
         FixedUpdate();
+    }
+
+    public void Reset()
+    {
+        transform.position = startPos;
+        float vert = UnityEngine.Random.Range(.25f, .75f);
+        float flipX = Mathf.Sign(UnityEngine.Random.Range(-1, 2));
+        float flipY = Mathf.Sign(UnityEngine.Random.Range(-1, 2));
+        currentMove = new Vector2(moveSpeed * (1 - vert) * flipX, moveSpeed * vert * flipY);
     }
 
     private void FixedUpdate()

@@ -79,7 +79,7 @@ Know that you have the best AI in the business!
 -> 2nd_Puzzle
 ===Security_Questions===
 ~useText = true
-~answer = "razorbacks"
+~answer = "razorrats"
 Before I send you to one of our agents, {player_Name}, please answer these security questions to verify who you are. 
 First Question: What was your college mascot?
 +[razorbacks] -> 4th_Puzzle
