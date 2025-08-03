@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 public class FinalBossEnemy : MonoBehaviour, IPointerEnterHandler
 {
-    public static event Action oof;
+    public event Action oof;
     public void OnPointerEnter(PointerEventData eventData)
     {
         oof?.Invoke();
