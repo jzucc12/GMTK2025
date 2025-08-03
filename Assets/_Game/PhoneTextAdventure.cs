@@ -98,12 +98,17 @@ public class PhoneTextAdventure : MonoBehaviour
 
     private void RefreshView()
     {
+        int old = int.Parse(story.variablesState.GetVariableWithName("speaker_Number").ToString());
         while (story.canContinue)
         {
             string text = story.Continue().Trim();
 			AddTextToStack(text, AITextPrefab, true, int.Parse(story.variablesState.GetVariableWithName("speaker_Number").ToString()));
 		}
-
+        int neww = int.Parse(story.variablesState.GetVariableWithName("speaker_Number").ToString());
+        if (old != neww && neww > 0)
+        {
+            isHolding = true;
+        }
 
         SetUpTextInputScreen(story.variablesState.GetVariableWithName("useText").ToString() == "true");
 
@@ -130,7 +135,6 @@ public class PhoneTextAdventure : MonoBehaviour
         if(!delay)
         {
             texts.Clear();
-            running.Cancel();
             running = null;
         }
         texts.Enqueue(new TextData(text, textPrefab, delay, speakerNo));

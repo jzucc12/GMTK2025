@@ -360,6 +360,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 182711185458383320, guid: 3e5a9ba48b8c0c942ae98e6a4807568c, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 75.899994
+      objectReference: {fileID: 0}
     - target: {fileID: 4326202489459858556, guid: 3e5a9ba48b8c0c942ae98e6a4807568c, type: 3}
       propertyPath: m_Name
       value: Game Canvas
@@ -444,6 +448,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7339570993342614933, guid: 3e5a9ba48b8c0c942ae98e6a4807568c, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 519420031}
+    - target: {fileID: 8280782564363256970, guid: 3e5a9ba48b8c0c942ae98e6a4807568c, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 351247718624710110, guid: 3cb85ae0084a350428341258e2728691, type: 3}
     - target: {fileID: 8819759689854384506, guid: 3e5a9ba48b8c0c942ae98e6a4807568c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -574,6 +586,14 @@ PrefabInstance:
     - target: {fileID: 1207748695608357655, guid: 05f21b90179d6fc49a95e30ca8b3b63c, type: 3}
       propertyPath: m_Name
       value: Win Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 2274443879311052678, guid: 05f21b90179d6fc49a95e30ca8b3b63c, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 519420031}
+    - target: {fileID: 2274443879311052678, guid: 05f21b90179d6fc49a95e30ca8b3b63c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4732183882383322951, guid: 05f21b90179d6fc49a95e30ca8b3b63c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
